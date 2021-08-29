@@ -8,7 +8,7 @@ exports.login=async (req,res)=>{
 
     let user=await User.findOne({user:username})||await User.findOne({email:username});
     if(!user) return res.status(401).send({message:'Usuario o contraseña inválidos'});
-    if(! User.comparePasswords(user.password,password)) return res.status(403).send({message:'Usuario o contraseña inválidos'});
+    if(!await User.comparePasswords(password,user.password)) return res.status(403).send({message:'Usuario o contraseña inválidos'});
 
     let datos={
         id:user._id,
