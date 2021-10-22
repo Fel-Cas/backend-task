@@ -9,13 +9,21 @@ const taskShema=mongoose.Schema({
         type:String,
         require:true
     },
-    date:{
+    createDate:{
         type:Date,
         default:Date.now()
+    },
+    deadLine:{
+        type:Date,
+        require:true
     },
     owner:{
         type:String,
         require:true
+    },
+    isActive:{
+        type:Number,
+        default:1
     }
 });
 

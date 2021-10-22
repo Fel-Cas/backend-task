@@ -2,7 +2,7 @@ const mongoose=require('mongoose');
 const bcrypt=require('bcryptjs');
 
 const usuarioShema=mongoose.Schema({
-    user:{
+    id:{
         type:String,
         unique:true
     },
@@ -18,9 +18,21 @@ const usuarioShema=mongoose.Schema({
         type:String,
         unique:true
     },
+    username:{
+        type:String,
+        require:true
+    },
     password:{
         type:String,
         require:true
+    },
+    foto:{
+        type:String,
+        require:false
+    },
+    role:{
+        type:String,
+        default:'USER'
     }
 })
 
