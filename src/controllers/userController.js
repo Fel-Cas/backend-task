@@ -1,10 +1,20 @@
 const User=require('../models/user');
+const MESSAGE=require('../config/message');
+const UserService=require('../service/user');
+const SERVICE=new UserService(User);
 
-exports.createUser=(req,res)=>{
-    let user=new User(req.body)
-    user.save().then(savedUser=>{
-        return res.status(201).send({savedUser, message:'Usuario guardado correctamente'})
-    }).catch(err=>res.status(500).send({message:'Ha ocurrido un error', erro:err}));
+
+exports.createUser=async(req,res)=>{
+    try {
+        let user=await SERVICE.getUser(req.body.id);
+        if(user.length>0) return res.status(405).send({message:'Ya existe un usuario con ese id'});
+        user =await SERVICE.getByEmail(req.body.email);
+        if(user.length>0) return res.status(405).send({message:'Ya existe un usuario con ese correo'});
+        user=await SERVICE.create(req.body);
+        return res.status(201).send({user});
+    } catch (error) {
+        return res.status(500).send({error});
+    }
 }
 
 exports.getUsers=async(req,res)=>{

@@ -18,10 +18,6 @@ const usuarioShema=mongoose.Schema({
         type:String,
         unique:true
     },
-    username:{
-        type:String,
-        require:true
-    },
     password:{
         type:String,
         require:true
@@ -36,7 +32,7 @@ const usuarioShema=mongoose.Schema({
     }
 })
 
-usuarioShema.pre('save',function(next){
+usuarioShema.pre('create',function(next){
     bcrypt.genSalt(10).then(salts=>{
         bcrypt.hash(this.password,salts).then(hash=>{
             this.password=hash;

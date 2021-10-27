@@ -21,9 +21,9 @@ const taskShema=mongoose.Schema({
         type:String,
         require:true
     },
-    isActive:{
-        type:Number,
-        default:1
+    status:{
+        type:String,
+        default:'PROGRAMADA'
     }
 });
 
