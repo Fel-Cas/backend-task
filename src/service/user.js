@@ -13,7 +13,7 @@ module.exports= class User{
         return this.modelUser.find();
     }
     getById(id){
-        return this.modelUser.findById(id)
+        return this.modelUser.findById(id);
     }
     getByEmail(email){
         return this.modelUser.find({
@@ -26,7 +26,7 @@ module.exports= class User{
         });
     }
     update(id,data){
-        return this.modelUser.findAndUpdate({_id:id},data);
+        return this.modelUser.update({_id:id},data); 
     }
     delete(id){
         return this.modelUser.delete({
@@ -38,8 +38,8 @@ module.exports= class User{
         const salt = await bcrypt.genSalt(10);
         return await   bcrypt.hash(password, salt);
     }
-    async comparePasswords(password, inputPassword){
-        return await  bcrypt.compare(password,inputPassword);
+    async comparePasswords(inputPassword, password){
+        return await  bcrypt.compareSync(inputPassword,password);
     }
     
 }

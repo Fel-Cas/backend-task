@@ -5,6 +5,7 @@ const User=require('../models/user');
 exports.verifyToken= async (req,res,next)=>{
     
     try {
+		console.log(req.headers.authorization);
 		if (!req.headers.authorization) {
 			return res.status(401).send('Unauhtorized Request');
 		}

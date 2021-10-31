@@ -39,7 +39,6 @@ exports.updateTask=async(req,res)=>{
     try {
         let id=req.params.id;
         let task=await SERVICE.getById(id);
-        console.log(task)
         if(!task) return res.status(404).send({message:MESSAGE.Task_NoFound});
         await SERVICE.update(id,req.body);
         return res.status(201).send({message:MESSAGE.Task_Updated})
